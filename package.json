@@ -1,0 +1,29 @@
+{
+  "name": "packa-for-tailwind",
+  "version": "1.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "author": "Shuffle Team",
+  "description": "Packs for Tailwind CSS",
+  "scripts": {
+    "css-compile": "npx @tailwindcss/cli -i tailwind/tailwind.css -o static/css/tailwind.css",
+    "css-minified": "npx @tailwindcss/cli -i tailwind/tailwind.css -o static/css/tailwind.min.css --minify",
+    "css": "npm-run-all --sequential css-*",
+    "watch": "npm-run-all --parallel watch-css watch-templates",
+    "watch-templates": "node ./bin/watch.js",
+    "watch-css": "npx @tailwindcss/cli -i tailwind/tailwind.css -o static/css/tailwind.min.css --watch"
+  },
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.0",
+    "autoprefixer": "^10.4.20",
+    "compression": "^1.7.5",
+    "cpx": "^1.2.1",
+    "express": "^4.21.2",
+    "glob-promise": "^6.0.7",
+    "nodemon": "^3.1.9",
+    "npm-run-all": "^4.1.5",
+    "pug": "^3.0.3",
+    "rimraf": "^3.0.2",
+    "tailwindcss": "^4.0.0"
+  }
+}

@@ -1,0 +1,69 @@
+doctype html
+html(lang="en")
+    head
+        title
+            = currentCategoryFormatted
+            |
+            | | Packs by Shuffle 
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+        link(rel="stylesheet" href="css/shuffle.css")
+        link(rel="stylesheet" href="css/prism.css")
+        link(rel="stylesheet" href="css/tailwind.min.css")
+
+        style(type="text/css").
+            .fixed {
+                position: relative !important;
+            }
+        link(rel='stylesheet' href='https://fonts.cdnfonts.com/css/general-sans?styles=135312,135310,135313,135303' type='text/css')
+        link(rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap' type='text/css')
+    body
+        div(id="shuffle-header")
+            a(href="/" id="shuffle-logo")
+                img(src="img/shuffle-logo.svg" alt="Shuffle")
+            div(id="shuffle-address-wrapper")
+                div(id="shuffle-address")
+                    span
+                        = currentCategory
+                    button(class="shuffle-button-reset")
+                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.08335 0.666657C8.75002 0.333323 8.25002 0.333323 7.91669 0.666657L5.00002 3.58332L2.08335 0.666657C1.75002 0.333323 1.25002 0.333323 0.916687 0.666657C0.583354 0.99999 0.583354 1.49999 0.916687 1.83332L4.41669 5.33332C4.58335 5.49999 4.75002 5.58332 5.00002 5.58332C5.25002 5.58332 5.41669 5.49999 5.58335 5.33332L9.08335 1.83332C9.41669 1.49999 9.41669 0.99999 9.08335 0.666657Z" fill="currentColor"></path>
+                        </svg>
+                div(id="shuffle-address-dropdown" class="shuffle-hidden")
+                    ul
+                        each category in categories
+                            li(data-shuffle-category=category)
+                                a(href="?category=" + category)
+                                    = category
+
+        div(id="shuffle-components")
+            each component in components
+                div(class="shuffle-component")
+                    div(class="shuffle-divider")
+                        div(class="shuffle-switch")
+                            button(class="shuffle-button-reset shuffle-switch-active" data-mode="preview") Preview
+                            button(class="shuffle-button-reset" data-mode="code") Code
+                        a(href="/component?id=" + currentCategory + '/' + component.file, target="_blank")
+                            | Open
+                            | 
+                            strong
+                                = component.file 
+                        span(class="shuffle-line") |
+                        a(href="/page?category=" + currentCategory + '&component=' + component.file, target="_blank")
+                            | Example page
+                        
+
+                    div(class="shuffle-preview") !{component.content}
+                    div(class="shuffle-code shuffle-hidden")
+                        button(class="shuffle-copy-code") 
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="16" height="16">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25ZM6.75 12h.008v.008H6.75V12Zm0 3h.008v.008H6.75V15Zm0 3h.008v.008H6.75V18Z" />
+                            </svg>
+                            span Copy code
+                            div(class="shuffle-copy-ok shuffle-hidden") 👍
+                        pre
+                            code(class="language-html")
+                                = component.content
+    script(src="js/main.js")
+    script(src="js/prism.js")
+    script(src='https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js')
